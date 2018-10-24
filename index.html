@@ -29,6 +29,7 @@
 	<script src="js/jquery-1.10.2.min.js"></script>
 	<script src="js/three/three.js"></script>
 	<script src="js/three/controls/OrbitControls.js"></script>
+	<script src="js/three/controls/TrackballControls.js"></script>
 
 	<script>
 		var renderer, camera, scene, light, controls;
@@ -74,7 +75,7 @@
 		}
 
 		function initModel() {
-			var cube = new THREE.CubeGeometry(10, 5, 5);
+			var cube = new THREE.CubeGeometry(16, 9, 9);
 
 			var materials = [];
 			var videos = [];
@@ -103,9 +104,9 @@
 				mesh.position.y = 50 * (2.0 * Math.random() - 1.0);
 				mesh.position.z = 50 * (2.0 * Math.random() - 1.0);
 
-				mesh.rotation.x = Math.random() * Math.PI;
+				//				mesh.rotation.x = Math.random() * Math.PI;
 				mesh.rotation.y = Math.random() * Math.PI;
-				mesh.rotation.z = Math.random() * Math.PI;
+				//				mesh.rotation.z = Math.random() * Math.PI;
 				mesh.updateMatrix();
 
 				mesh.video = videos[i % 3];
@@ -114,11 +115,21 @@
 		}
 
 		function initControls() {
-			controls = new THREE.OrbitControls(camera, renderer.domElement);
-			controls.enableDamping = true;
-			controls.enableZoom = true;
-			controls.minDistance = 0;
-			controls.enablePan = true;
+			//			controls = new THREE.OrbitControls(camera, renderer.domElement);
+			//			controls.enableDamping = true;
+			//			controls.enableZoom = true;
+			//			controls.minDistance = 0;
+			//			controls.enablePan = true;
+
+			controls = new THREE.TrackballControls(camera);
+			controls.rotateSpeed = 5;
+			controls.zoomSpeed = 3;
+			controls.panSpeed = 0.8;
+			controls.noZoom = false;
+			controls.noPan = false;
+			controls.staticMoving = false;
+			controls.dynamicDampingFactor = 0.3;
+			controls.addEventListener('change', render);
 		}
 
 		var raycaster;
