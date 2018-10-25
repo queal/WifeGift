@@ -84,6 +84,8 @@
 				video.src = "video/" + i + ".mp4";
 				if(i == 1) {
 					video.autoplay = "autoplay";
+				} else {
+					video.preload = "none";
 				}
 				videos.push(video);
 
